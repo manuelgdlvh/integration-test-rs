@@ -37,11 +37,12 @@ fn init() {
                 let postgres_container = &*POSTGRES_CONTAINER;
                 let mut http_server = HttpServer::build("127.0.0.1:3000", "postgres", "postgres", "postgres", "localhost"
                                                         , postgres_container.get_host_port_ipv4(5432)).await.unwrap();
-                let _ = http_server.start().await;
+                http_server.start().await
             });
     });
 
-    thread::sleep(Duration::new(5, 0));
+    println!("waiting to web server to be fully initialized...");
+    thread::sleep(Duration::new(3, 0));
 }
 
 

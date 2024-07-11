@@ -1,5 +1,5 @@
 [package]
-name = "hex-rust"
+name = "integration-test-rs"
 version = "0.1.0"
 edition = "2021"
 

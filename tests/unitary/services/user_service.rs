@@ -2,8 +2,8 @@ use std::sync::Arc;
 
 use mockall::{lazy_static, mock};
 
-use core::repositories::user_repository::Repository;
-use core::services::user_service::{UserService, UserServiceImpl};
+use lib::repositories::user_repository::Repository;
+use lib::services::user_service::{UserService, UserServiceImpl};
 
 lazy_static! {
         static ref TEST_DATA: Vec<String> = vec!["0".to_string(), "1".to_string()];

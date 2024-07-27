@@ -1,25 +1,22 @@
-#[tokio::test]
-async fn test() -> anyhow::Result<()> {
-    let body = reqwest::get("http://localhost:3000/get")
-        .await?
-        .text()
-        .await?;
-
-    println!("Response: {}", body);
-    Ok(())
-}
+use reqwest::{Client, StatusCode};
 
 #[tokio::test]
-async fn test2() -> anyhow::Result<()> {
-    let body = reqwest::get("http://localhost:3000/get")
-        .await?
-        .text()
+async fn should_create_user() -> anyhow::Result<()> {
+    let request = r#"{"data": "data_test"}"#;
+
+    let client = Client::new();
+    let response = client.post("http://localhost:3000/user/create")
+        .header("Content-Type", "application/json")
+        .body(request)
+        .send()
         .await?;
 
-    println!("Response: {}", body);
+    assert_eq!(response.status(), StatusCode::CREATED);
+
+    let response_body = response.text().await?;
+    assert_eq!(response_body.as_str(), r#"{"response":"data_test"}"#);
     Ok(())
 }
-
 
 
 
